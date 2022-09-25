@@ -17,7 +17,6 @@ public class AppFrame extends JFrame {
         title = new TitleBar();
         list = new List();
 
-
         btnPanel = new ButtonPanel();
         this.add(title, BorderLayout.NORTH);
         this.add(btnPanel, BorderLayout.SOUTH);
