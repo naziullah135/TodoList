@@ -4,7 +4,9 @@ import java.awt.*;
 
 public class AppFrame extends JFrame {
     private TitleBar title;
+
     private List list;
+
     private ButtonPanel btnPanel;
 
     AppFrame(){
@@ -14,8 +16,11 @@ public class AppFrame extends JFrame {
 
         title = new TitleBar();
         list = new List();
+
+
         btnPanel = new ButtonPanel();
         this.add(title, BorderLayout.NORTH);
+        this.add(btnPanel, BorderLayout.SOUTH);
     }
 
 

@@ -13,5 +13,6 @@ public class TitleBar extends JPanel {
         titleText.setHorizontalAlignment(JLabel.CENTER);
 
         this.add(titleText);
+
     }
 }
