@@ -1,26 +1,81 @@
 package Sections;
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class AppFrame extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+public class AppFrame extends JFrame{
+
     private TitleBar title;
-
+    private Footer footer;
     private List list;
 
-    private ButtonPanel btnPanel;
+    private JButton newTask;
+    private JButton clear;
 
-    AppFrame(){
+    AppFrame()
+    {
         this.setSize(400,700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBackground(Color.green);
         this.setVisible(true);
 
         title = new TitleBar();
+        footer = new Footer();
         list = new List();
 
-        btnPanel = new ButtonPanel();
-        this.add(title, BorderLayout.NORTH);
-        this.add(btnPanel, BorderLayout.SOUTH);
+        this.add(title,BorderLayout.NORTH);
+        this.add(footer,BorderLayout.SOUTH);
+        this.add(list,BorderLayout.CENTER);
+
+        newTask = footer.getNewTask();
+        clear = footer.getClear();
+
+        addListeners();
     }
 
+
+    public void addListeners()
+    {
+        newTask.addMouseListener(new MouseAdapter()
+        {
+            @override
+            public void mousePressed(MouseEvent e)
+            {
+                Task task = new Task();
+                list.add(task);
+                list.updateNumbers();
+
+
+                task.getDone().addMouseListener(new MouseAdapter()
+                {
+                    @override
+                    public void mousePressed(MouseEvent e)
+                    {
+
+                        task.changeState();
+                        list.updateNumbers();
+                        revalidate();
+
+                    }
+                });
+            }
+
+        });
+
+
+        clear.addMouseListener(new MouseAdapter()
+        {
+            @override
+            public void mousePressed(MouseEvent e)
+            {
+                list.removeCompletedTasks();
+                repaint();
+            }
+        });
+    }
 
 }
